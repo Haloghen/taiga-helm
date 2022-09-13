@@ -1,8 +1,3 @@
-# Default values for taiga.
-
-imagePullSecrets: []
-# - name: "image-pull-secret"
-
 global:
   imageRegistry: ""
   imagePullSecrets: []
@@ -16,9 +11,6 @@ commonAnnotations: {}
 clusterDomain: cluster.local
 extraDeploy: []
 
-
-
-
 taigaAsyncRabbitmq:
   image:
     registry: docker.io
@@ -29,13 +21,13 @@ taigaAsyncRabbitmq:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -53,7 +45,7 @@ taigaAsyncRabbitmq:
     annotations: {}
     labels: {}
     selector: {}
-  
+
   service:
     type: ClusterIP
     clusterIP: ""
@@ -80,13 +72,13 @@ taigaAsync:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -121,13 +113,13 @@ taigaBack:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -162,13 +154,13 @@ taigaDB:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -176,7 +168,7 @@ taigaDB:
   nodeSelector: {}
   tolerations: []
   affinity: {}
-  
+
   persistence:
     enabled: true
     existingClaim: ""
@@ -213,13 +205,13 @@ taigaEventsRabbitmq:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -237,7 +229,7 @@ taigaEventsRabbitmq:
     annotations: {}
     labels: {}
     selector: {}
-  
+
   service:
     type: ClusterIP
     clusterIP: ""
@@ -264,13 +256,13 @@ taigaEvents:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -305,13 +297,13 @@ taigaFront:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -346,7 +338,7 @@ taigaGateway:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
@@ -359,10 +351,10 @@ taigaGateway:
     annotations: {}
     labels: {}
     selector: {}
-  
+
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -397,13 +389,13 @@ taigaProtected:
     pullPolicy: IfNotPresent
     pullSecrets: []
     debug: false
-  
+
   labels: {}
   podLabels: {}
 
   updateStrategy:
     type: RollingUpdate
-  
+
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -427,8 +419,8 @@ taigaProtected:
         protocol: TCP
         port: 8003
         targetPort: 8003
-    
-    
+
+
 media:
   persistence:
     enabled: true
@@ -494,16 +486,16 @@ taiga:
     TLS: false
     SSL: false
     from: "Taiga <noreply@example.com>"
-  
+
   telemetry:
     enable: true
-  
+
   rabbitmq:
     user: taiga
     password: taiga
     vhost: taiga
     cookieSecret: "secret-erlang-cookie"
-  
+
   github:
     auth:
       enable: false
@@ -514,29 +506,27 @@ taiga:
       enable: false
       apiClientID: ""
       apiClientSecret: ""
-  
+
   gitlab:
     enable: false
     apiClientID: ""
     apiClientSecret: ""
     url: ""
-  
+
   jira:
     enable: false
     consumerKey: ""
     certificate: ""
     publicCertificate: ""
-  
+
   trello:
     enable: false
     apiKey: ""
     secretKey: ""
-  
+
   maxAge: 360
-    
 
-
-# env:  
+# env:
   # enableEmail: false
   # emailBackend: "django.core.mail.backends.smtp.EmailBackend"
   # defaultFromEmail: "no-reply@example.com"
@@ -614,7 +604,7 @@ taiga:
 # taigaAsync:
 
 #   image:
-#     repository: taigaio/taiga-back      
+#     repository: taigaio/taiga-back
 #     pullPolicy: IfNotPresent
 #     tag: "{{ .Chart.AppVersion }}"
 
@@ -643,7 +633,7 @@ taiga:
 
 #   affinity: {}
 
-  
+
 # taigaBack:
 
 #   image:
@@ -682,7 +672,7 @@ taiga:
 #   enable: true
 
 #   image:
-#     repository: postgres     
+#     repository: postgres
 #     pullPolicy: IfNotPresent
 #     tag: "12.3"
 
@@ -725,7 +715,7 @@ taiga:
 # taigaEventsRabbitmq:
 
 #   image:
-#     repository: rabbitmq      
+#     repository: rabbitmq
 #     pullPolicy: IfNotPresent
 #     tag: "3-management-alpine"
 
@@ -768,7 +758,7 @@ taiga:
 # taigaEvents:
 
 #   image:
-#     repository: taigaio/taiga-events     
+#     repository: taigaio/taiga-events
 #     pullPolicy: IfNotPresent
 #     tag: "6.1.1"
 
@@ -801,7 +791,7 @@ taiga:
 # taigaFront:
 
 #   image:
-#     repository: taigaio/taiga-front  
+#     repository: taigaio/taiga-front
 #     pullPolicy: IfNotPresent
 #     tag: "{{ .Chart.AppVersion }}"
 
@@ -834,7 +824,7 @@ taiga:
 # taigaGateway:
 
 #   image:
-#     repository: nginx    
+#     repository: nginx
 #     pullPolicy: IfNotPresent
 #     tag: "1.19-alpine"
 
@@ -888,7 +878,7 @@ taiga:
 # taigaProtected:
 
 #   image:
-#     repository: taigaio/taiga-protected     
+#     repository: taigaio/taiga-protected
 #     pullPolicy: IfNotPresent
 #     tag: "{{ .Chart.AppVersion }}"
 
