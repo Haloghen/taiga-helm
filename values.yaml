@@ -35,6 +35,14 @@ taigaAsyncRabbitmq:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   persistence:
     enabled: true
@@ -78,6 +86,14 @@ taigaAsync:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP
@@ -111,6 +127,14 @@ taigaBack:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP
@@ -144,6 +168,14 @@ taigaDB:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
   
   persistence:
     enabled: true
@@ -187,6 +219,14 @@ taigaEventsRabbitmq:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   persistence:
     enabled: true
@@ -230,6 +270,14 @@ taigaEvents:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP
@@ -263,6 +311,14 @@ taigaFront:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP
@@ -306,6 +362,14 @@ taigaGateway:
   
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP
@@ -339,6 +403,14 @@ taigaProtected:
 
   updateStrategy:
     type: RollingUpdate
+  
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP
@@ -383,13 +455,17 @@ static:
     selector: {}
 
 taiga:
-  taigaURL: "http://localhost:9000"
-  taigaWebsocketsURL: "ws://localhost:9000"
-  taigaSecretKey: "taiga-back-secret-key"
-  taigaSitesDomain: "localhost"
-  taigaSitesScheme: "http"
-  publicRegisterEnabled: "false"
-  enableSlack: "false"
+  url: "http://localhost:9000"
+  websocketsURL: "ws://localhost:9000"
+  secretKey: "taiga-back-secret-key"
+  sitesDomain: "localhost"
+  sitesScheme: "http"
+  enableRegistration: true
+  enableSlack: false
+  enableGravatar: true
+  enableDebug: false
+  defaultLanguage: en
+
 
   postgresql:
     enabled: true
@@ -409,7 +485,7 @@ taiga:
   existingSecret: ""
 
   email:
-    enable: "false"
+    enable: false
     backend: django.core.mail.backends.smtp.EmailBackend
     host: ""
     port: 25
@@ -443,6 +519,7 @@ taiga:
     enable: false
     apiClientID: ""
     apiClientSecret: ""
+    url: ""
   
   jira:
     enable: false
@@ -454,398 +531,388 @@ taiga:
     enable: false
     apiKey: ""
     secretKey: ""
+  
+  maxAge: 360
     
 
 
-env:  
-#   enableEmail: "false"
-#   emailBackend: "django.core.mail.backends.smtp.EmailBackend"
-#   defaultFromEmail: "no-reply@example.com"
-#   emailHost: "smtp.host.example.com"
-#   emailPort: "587"
-#   emailHostUser: "user"
-#   emailHostPassword: "password"
-#   emailUseTLS: "true"
-#   emailUseSSL: "true"
-
+# env:  
+  # enableEmail: false
+  # emailBackend: "django.core.mail.backends.smtp.EmailBackend"
+  # defaultFromEmail: "no-reply@example.com"
+  # emailHost: "smtp.host.example.com"
+  # emailPort: "587"
+  # emailHostUser: "user"
+  # emailHostPassword: "password"
+  # emailUseTLS: "true"
+  # emailUseSSL: "true"
   # enableTelemetry: "true"
-
   # rabbitmqPass: "taiga"
   # rabbitmqUser: "taiga"
   # rabbitmqErlangCookie: "secret-erlang-cookie"
   # rabbitmqVhost: "taiga"
-
-  # enableGithubAuth: "false"
+  # enableGithubAuth: false
   # githubApiClientID: "github-api-client-id"
   # githubApiClientSecret: "github-api-client-secret"
-
-  # enableGitlabAuth: "false"
+  # enableGitlabAuth: false
   # gitlabClientID: "gitlab-client-id"
   # gitlabApiClientSecret: "gitlab-api-client-secret"
   # gitlabURL: "gitlab-url"
-
-  # enableGithubImporter: "false"
+  # enableGithubImporter: false
   # githubImporterClientID: "client-id-from-github"
   # githubImporterClientSecret: "client-secret-from-github"
-  
-  # enableJiraImporter: "false"
-  jiraImporterConsumerKey: "consumer-key-from-jira"
-  jiraImporterCert: "cert-from-jira"
-  jiraImporterPubCert: "pub-cert-from-jira"
+  # enableJiraImporter: false
+  # jiraImporterConsumerKey: "consumer-key-from-jira"
+  # jiraImporterCert: "cert-from-jira"
+  # jiraImporterPubCert: "pub-cert-from-jira"
+  # enableTrelloImporter: false
+  # trelloImporterApiKey: "api-key-from-trello"
+  # trelloImporterSecretKey: "secret-key-from-trello"
+  # maxAge: "360"
+  # enableGravatar: false
 
-  # enableTrelloImporter: "false"
-  trelloImporterApiKey: "api-key-from-trello"
-  trelloImporterSecretKey: "secret-key-from-trello"
+# taigaAsyncRabbitmq:
+#   image:
+#     repository: rabbitmq
+#     pullPolicy: IfNotPresent
+#     tag: "3-management-alpine"
+#   persistence:
+#     ## Volume used to store the Taiga Async RabbitMQ's data. Default is boolean `false`.
+#     ##
+#     enabled: false
+#     size: '100Mi'
+#     ## Sets persistent volume claim's storageClassName. Defaults to `default`.
+#     ##
+#     storageClassName: 'default'
+#     accessMode: 'ReadWriteOnce'
+#   service:
+#     type: ClusterIP
+#     port: 5672
 
-  maxAge: "360"
+#   podAnnotations: {}
 
-  enableGravatar: "false"
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-taigaAsyncRabbitmq:
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  image:
-    repository: rabbitmq
-    pullPolicy: IfNotPresent
-    tag: "3-management-alpine"
+#   resources: {}
 
-  persistence:
-    ## Volume used to store the Taiga Async RabbitMQ's data. Default is boolean `false`.
-    ##
-    enabled: false
-    size: '100Mi'
-    ## Sets persistent volume claim's storageClassName. Defaults to `default`.
-    ##
-    storageClassName: 'default'
-    accessMode: 'ReadWriteOnce'
+#   nodeSelector: {}
 
-  service:
-    type: ClusterIP
-    port: 5672
+#   tolerations: []
 
-  podAnnotations: {}
-
-  podSecurityContext: {}
-    # fsGroup: 2000
-
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
-  resources: {}
-
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity: {}
+#   affinity: {}
 
 
-taigaAsync:
+# taigaAsync:
 
-  image:
-    repository: taigaio/taiga-back      
-    pullPolicy: IfNotPresent
-    tag: "{{ .Chart.AppVersion }}"
+#   image:
+#     repository: taigaio/taiga-back      
+#     pullPolicy: IfNotPresent
+#     tag: "{{ .Chart.AppVersion }}"
 
-  service:
-    type: ClusterIP
-    port: 8000
+#   service:
+#     type: ClusterIP
+#     port: 8000
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}
 
   
-taigaBack:
+# taigaBack:
 
-  image:
-    repository: taigaio/taiga-back
-    pullPolicy: IfNotPresent
-    tag: " {{ .Chart.AppVersion }}"
+#   image:
+#     repository: taigaio/taiga-back
+#     pullPolicy: IfNotPresent
+#     tag: " {{ .Chart.AppVersion }}"
 
-  service:
-    type: ClusterIP
-    port: 8000
+#   service:
+#     type: ClusterIP
+#     port: 8000
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}
 
 
-taigaDB:
+# taigaDB:
 
-  enable: true
+#   enable: true
 
-  image:
-    repository: postgres     
-    pullPolicy: IfNotPresent
-    tag: "12.3"
+#   image:
+#     repository: postgres     
+#     pullPolicy: IfNotPresent
+#     tag: "12.3"
 
-  persistence:
-    ## Volume used to store Taiga DB data. Default is boolean `false`.
-    ##
-    enabled: false
-    size: '100Mi'
-    ## Sets persistent volume claim's storageClassName. Defaults to `default`.
-    ##
-    storageClassName: 'default'
-    accessMode: 'ReadWriteOnce'
+#   persistence:
+#     ## Volume used to store Taiga DB data. Default is boolean `false`.
+#     ##
+#     enabled: false
+#     size: '100Mi'
+#     ## Sets persistent volume claim's storageClassName. Defaults to `default`.
+#     ##
+#     storageClassName: 'default'
+#     accessMode: 'ReadWriteOnce'
 
-  service:
-    type: ClusterIP
-    port: 5432
+#   service:
+#     type: ClusterIP
+#     port: 5432
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}
 
 
-taigaEventsRabbitmq:
+# taigaEventsRabbitmq:
 
-  image:
-    repository: rabbitmq      
-    pullPolicy: IfNotPresent
-    tag: "3-management-alpine"
+#   image:
+#     repository: rabbitmq      
+#     pullPolicy: IfNotPresent
+#     tag: "3-management-alpine"
 
-  persistence:
-    ## Volume used to store the Taiga Events RabbitMQ's data. Default is boolean `false`.
-    ##
-    enabled: false
-    size: '100Mi'
-    ## Sets persistent volume claim's storageClassName. Defaults to `default`.
-    ##
-    storageClassName: 'default'
-    accessMode: 'ReadWriteOnce'
+#   persistence:
+#     ## Volume used to store the Taiga Events RabbitMQ's data. Default is boolean `false`.
+#     ##
+#     enabled: false
+#     size: '100Mi'
+#     ## Sets persistent volume claim's storageClassName. Defaults to `default`.
+#     ##
+#     storageClassName: 'default'
+#     accessMode: 'ReadWriteOnce'
 
-  service:
-    type: ClusterIP
-    port: 5672
+#   service:
+#     type: ClusterIP
+#     port: 5672
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}
 
 
-taigaEvents:
+# taigaEvents:
 
-  image:
-    repository: taigaio/taiga-events     
-    pullPolicy: IfNotPresent
-    tag: "6.1.1"
+#   image:
+#     repository: taigaio/taiga-events     
+#     pullPolicy: IfNotPresent
+#     tag: "6.1.1"
 
-  service:
-    type: ClusterIP
-    port: 8888
+#   service:
+#     type: ClusterIP
+#     port: 8888
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}
 
 
-taigaFront:
+# taigaFront:
 
-  image:
-    repository: taigaio/taiga-front  
-    pullPolicy: IfNotPresent
-    tag: "{{ .Chart.AppVersion }}"
+#   image:
+#     repository: taigaio/taiga-front  
+#     pullPolicy: IfNotPresent
+#     tag: "{{ .Chart.AppVersion }}"
 
-  service:
-    type: ClusterIP
-    port: 80
+#   service:
+#     type: ClusterIP
+#     port: 80
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}
 
 
-taigaGateway:
+# taigaGateway:
 
-  image:
-    repository: nginx    
-    pullPolicy: IfNotPresent
-    tag: "1.19-alpine"
+#   image:
+#     repository: nginx    
+#     pullPolicy: IfNotPresent
+#     tag: "1.19-alpine"
 
-  persistence:
-    ## Volume used to store the Taiga Gateway's data. Default is boolean `false`.
-    ##
-    enabled: false
-    size: '100Mi'
-    ## Sets persistent volume claim's storageClassName. Defaults to `default`.
-    ##
-    storageClassName: 'default'
-    accessMode: 'ReadWriteOnce'
+#   persistence:
+#     ## Volume used to store the Taiga Gateway's data. Default is boolean `false`.
+#     ##
+#     enabled: false
+#     size: '100Mi'
+#     ## Sets persistent volume claim's storageClassName. Defaults to `default`.
+#     ##
+#     storageClassName: 'default'
+#     accessMode: 'ReadWriteOnce'
 
-  ingress:
-    enable: false
-    annotations:
-    # traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    # traefik.ingress.kubernetes.io/router.tls: 'true'
-    # traefik.ingress.kubernetes.io/service.sticky.cookie: 'true'
-    hosts:
-      - host: taiga.example.com
-        paths:
-          -  "/"
+#   ingress:
+#     enable: false
+#     annotations:
+#     # traefik.ingress.kubernetes.io/router.entrypoints: websecure
+#     # traefik.ingress.kubernetes.io/router.tls: 'true'
+#     # traefik.ingress.kubernetes.io/service.sticky.cookie: 'true'
+#     hosts:
+#       - host: taiga.example.com
+#         paths:
+#           -  "/"
 
-  service:
-    type: ClusterIP
-    port: 9000
+#   service:
+#     type: ClusterIP
+#     port: 9000
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}
 
 
-taigaProtected:
+# taigaProtected:
 
-  image:
-    repository: taigaio/taiga-protected     
-    pullPolicy: IfNotPresent
-    tag: "{{ .Chart.AppVersion }}"
+#   image:
+#     repository: taigaio/taiga-protected     
+#     pullPolicy: IfNotPresent
+#     tag: "{{ .Chart.AppVersion }}"
 
-  service:
-    type: ClusterIP
-    port: 8003
+#   service:
+#     type: ClusterIP
+#     port: 8003
 
-  podAnnotations: {}
+#   podAnnotations: {}
 
-  podSecurityContext: {}
-    # fsGroup: 2000
+#   podSecurityContext: {}
+#     # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+#   securityContext: {}
+#     # capabilities:
+#     #   drop:
+#     #   - ALL
+#     # readOnlyRootFilesystem: true
+#     # runAsNonRoot: true
+#     # runAsUser: 1000
 
-  resources: {}
+#   resources: {}
 
-  nodeSelector: {}
+#   nodeSelector: {}
 
-  tolerations: []
+#   tolerations: []
 
-  affinity: {}
+#   affinity: {}

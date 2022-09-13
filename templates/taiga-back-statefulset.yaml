@@ -32,7 +32,7 @@ spec:
         - name: taiga-back
           securityContext:
             {{- toYaml .Values.taigaBack.securityContext | nindent 12 }}
-          image: "{{ .Values.taigaBack.image.repository }}:{{ .Values.taigaBack.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.taigaBack.image.repository }}:{{ .Values.taigaBack.image.tag }}"
           imagePullPolicy: {{ .Values.taigaBack.image.pullPolicy }}
           ports:
             - name: http
@@ -87,38 +87,35 @@ spec:
 #            - name: CELERY_BROKER_URL
 #              value: "amqp://taiga:taiga@{{ template "taiga.fullname" . }}-async-rabbitmq:{{  .Values.taigaAsyncRabbitmq.service.port }}/taiga"
 
-            {{- if eq (lower .Values.env.enableEmail) "true" }}
+            {{- if eq (lower .Values.taiga.email.enable) "true" }}
             - name: EMAIL_BACKEND
-              value: {{ .Values.env.emailBackend | quote }}
+              value: {{ .Values.taiga.email.backend | quote }}
             - name: DEFAULT_FROM_EMAIL
-              value: {{ .Values.env.defaultFromEmail | quote }}
+              value: {{ .Values.taiga.email.from | quote }}
             - name: EMAIL_HOST
-              value: {{ .Values.env.emailHost | quote }}
+              value: {{ .Values.taiga.email.host | quote }}
             - name: EMAIL_PORT
-              value: {{ .Values.env.emailPort | quote }}
+              value: {{ .Values.taiga.email.port | quote }}
             - name: EMAIL_HOST_USER
-              value: {{ .Values.env.emailHostUser | quote }}
+              value: {{ .Values.taiga.email.user | quote }}
             - name: EMAIL_HOST_PASSWORD
-              value: {{ .Values.env.emailHostPassword | quote }}
+              value: {{ .Values.taiga.email.password | quote }}
             - name: EMAIL_USE_TLS
-              value: {{ .Values.env.emailUseTLS | quote }}
+              value: {{ .Values.taiga.email.TLS | quote }}
             - name: EMAIL_USE_SSL
-              value: {{ .Values.env.emailUseSSL | quote }}
+              value: {{ .Values.taiga.email.SSL | quote }}
             {{- end }}
 
             - name: ENABLE_TELEMETRY
-              value: {{ lower .Values.env.enableTelemetry | quote }}
+              value: {{ lower .Values.taiga.telemetry.enable | quote }}
 
-            {{- if eq (lower .Values.env.enableGithubAuth) "true" }}
             - name: ENABLE_GITHUB_AUTH
               value: {{ lower .Values.env.enableGithubAuth | quote }}
             - name: GITHUB_API_CLIENT_ID
               value: {{ .Values.env.githubApiClientID | quote }}
             - name: GITHUB_API_CLIENT_SECRET
               value: {{ .Values.env.githubApiClientSecret | quote }}
-            {{- end }}
 
-            {{- if eq (lower .Values.env.enableGitlabAuth) "true" }}
             - name: ENABLE_GITLAB_AUTH
               value: {{ lower .Values.env.enableGitlabAuth | quote }}
             - name: GITLAB_CLIENT_ID
@@ -127,34 +124,28 @@ spec:
               value: {{ .Values.env.gitlabApiClientSecret | quote }}
             - name: GITLAB_URL
               value: {{ .Values.env.gitlabURL | quote }}
-            {{- end }}
 
-            {{- if eq (lower .Values.env.enableGithubImporter) "true" }}
             - name: ENABLE_GITHUB_IMPORTER
               value: {{ lower .Values.env.enableGithubImporter | quote }}
             - name: GITHUB_IMPORTER_CLIENT_ID
               value: {{ .Values.env.githubImporterClientID | quote }}
             - name: GITHUB_IMPORTER_CLIENT_SECRET
               value: {{ .Values.env.githubImporterClientSecret | quote }} 
-            {{- end }}
 
-            {{- if eq (lower .Values.env.enableJiraImporter) "true" }}
             - name: ENABLE_JIRA_IMPORTER
               value: {{ lower .Values.env.enableJiraImporter | quote }}
             - name: JIRA_IMPORTER_CONSUMER_KEY
               value: {{ .Values.env.jiraImporterConsumerKey | quote }}
             - name: JIRA_IMPORTER_CERT
               value: {{ .Values.env.jiraImporterCert | quote }}
-            {{- end }}
 
-            {{- if eq (lower .Values.env.enableTrelloImporter) "true" }}
             - name: ENABLE_TRELLO_IMPORTER
               value: {{ lower .Values.env.enableTrelloImporter | quote }}
             - name: TRELLO_IMPORTER_API_KEY
               value: {{ .Values.env.trelloImporterApiKey | quote }}
             - name: TRELLO_IMPORTER_SECRET_KEY
               value: {{ .Values.env.trelloImporterSecretKey | quote }}
-            {{- end }}
+
           volumeMounts:
             - mountPath: /taiga-back/static
               name: taiga-static-data

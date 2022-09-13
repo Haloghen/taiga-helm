@@ -32,56 +32,52 @@ spec:
         - name: taiga-front
           securityContext:
             {{- toYaml .Values.taigaFront.securityContext | nindent 12 }}
-          image: "{{ .Values.taigaFront.image.repository }}:{{ .Values.taigaFront.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.taigaFront.image.repository }}:{{ .Values.taigaFront.image.tag }}"
           imagePullPolicy: {{ .Values.taigaFront.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
           env:
             - name: TAIGA_URL
-              value: {{ .Values.env.taigaURL | quote }}
+              value: {{ .Values.taiga.url | quote }}
             - name: TAIGA_WEBSOCKETS_URL
-              value: {{ .Values.env.taigaWebsocketsURL | quote }}
+              value: {{ .Values.taiga.websocketsURL | quote }}
 
             - name: PUBLIC_REGISTER_ENABLED
-              value: {{ lower .Values.env.publicRegisterEnabled | quote }}
+              value: {{ lower .Values.taiga.enableRegistration | quote }}
 
             - name: ENABLE_SLACK
-              value: {{ lower .Values.env.enableSlack | quote }}
+              value: {{ lower .Values.taiga.enableSlack | quote }}
 
-            {{- if eq (lower .Values.env.enableGithubAuth) "true" }}
+            - name: ENABLE_DEBUG
+              value: {{ lower .Values.taiga.enableDebug | quote }}
+
+            - name: DEFAULT_LANGUAGE
+              value: {{ lower .Values.taiga.defaultLanguage | quote }}
+
             - name: ENABLE_GITHUB_AUTH
-              value: {{ lower .Values.env.enableGithubAuth | quote }}
+              value: {{ lower .Values.taiga.github.auth.enable | quote }}
             - name: GITHUB_API_CLIENT_ID
-              value: {{ .Values.env.githubApiClientID | quote }}
-            {{- end }}
+              value: {{ .Values.taiga.github.auth.apiClientID | quote }}
 
-            {{- if eq (lower .Values.env.enableGitlabAuth) "true" }}
             - name: ENABLE_GITLAB_AUTH
-              value: {{ lower .Values.env.enableGitlabAuth | quote }}
+              value: {{ lower .Values.taiga.gitlab.enable | quote }}
             - name: GITLAB_CLIENT_ID
-              value: {{ .Values.env.gitlabClientID | quote }}
+              value: {{ .Values.taiga.gitlab.apiClientID | quote }}
             - name: GITLAB_URL
-              value: {{ .Values.env.gitlabURL | quote }}
-            {{- end }}
+              value: {{ .Values.taiga.gitlab.url | quote }}
 
-            {{- if eq (lower .Values.env.enableGithubImporter) "true" }}
             - name: ENABLE_GITHUB_IMPORTER 
-              value: {{ lower .Values.env.enableGithubImporter | quote }}
-            {{- end }}
+              value: {{ lower .Values.taiga.github.importer.enable | quote }}
 
-            {{- if eq (lower .Values.env.enableJiraImporter) "true" }}
             - name: ENABLE_JIRA_IMPORTER
-              value: {{ lower .Values.env.enableJiraImporter | quote }}
-            {{- end }}
+              value: {{ lower .Values.taiga.jira.enable | quote }}
 
-            {{- if eq (lower .Values.env.enableTrelloImporter) "true" }}
             - name: ENABLE_TRELLO_IMPORTER
-              value: {{ lower .Values.env.enableTrelloImporter | quote }}
-            {{- end }}
+              value: {{ lower .Values.taiga.trello.enable | quote }}
 
             - name: ENABLE_GRAVATAR
-              value: {{ lower .Values.env.enableGravatar | quote }}
+              value: {{ lower .Values.taiga.enableGravatar | quote }}
 
           {{- with .Values.taigaFront.resources }}
           resources:
